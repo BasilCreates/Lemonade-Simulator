@@ -44,6 +44,20 @@ public class Item
         private set { quantity = value; }
     }
 
+    public void AddQuantity(int amount)
+    {
+        ItemQuantity += amount;
+    }
+
+    public void RemoveQuantity(int amount) //To be able to remove items from inventory after an order is complete
+    {
+        if (ItemQuantity < amount)
+        {
+            return;
+        }
+        ItemQuantity -= amount;
+    }
+
     public Item(string newName, int newPrice,  Sprite newImage, int newQuantity, Icategory newCategory) //setting a constructor with our "ingredients", and releasing it to the public basically. They then have to follow these exact parameters to create the item
     {
         Name = newName;

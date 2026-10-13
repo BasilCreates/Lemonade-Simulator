@@ -31,17 +31,16 @@ public class ShopInventory : MonoBehaviour
     }
 
 
-    public void CreateItem()
+    public void CreateItem() //create a list of items, using our criteria from our Item Class
     {
-        Item Cups = new Item("Cups", 5, cupImage, 50, Item.Icategory.Ingredient);
+        Item Cups = new Item("Cups", 5, cupImage, 50, Item.Icategory.Ingredient); //
         Item lemon = new Item("lemon", 5, lemonImage, 5, Item.Icategory.Ingredient); //lemon is created from our item class script
-        Item sugarCubes = new Item("Sugar Cubes", 5, sugarCubeImage, 10, Item.Icategory.Ingredient);
+        Item sugarCubes = new Item("Sugar Cubes", 5, sugarCubeImage, 10, Item.Icategory.Ingredient); 
         Item waterBottle = new Item("Water Bottle", 5, waterBottleImage, 5, Item.Icategory.Ingredient);
         items.Add(lemon); //adds lemon to our list 
         items.Add(Cups); //adds cups to our list 
         items.Add(sugarCubes); //adds sugar cubes to our list 
-        items.Add(waterBottle); //adds water bottles to our list 
-
+        items.Add(waterBottle); //adds water bottles to our list
         Item lemonadeStand1 = new Item("Lemonade Stand 1", 8, lemonImage, 1, Item.Icategory.LemonadeStand);
         Item woodcrateInventory = new Item("Wood Crate Inventory", 10, woodCrateInventory, 1, Item.Icategory.Inventory);
         Item wagonnInventory = new Item("Wagon Inventory", 20, wagonInventory, 1, Item.Icategory.Inventory);
@@ -52,6 +51,6 @@ public class ShopInventory : MonoBehaviour
         items.Add(minifridgeInventory);
 
 
-        Debug.Log("Populating the list!");
+        Debug.Log("Populating the list!"); //making sure my lists are populated
     }
 }

@@ -10,6 +10,14 @@ public class ShopItemUI : MonoBehaviour //Where we DISPLAY the specific item its
 
     private Item item;
 
+    private PlayerMoney playerMoney;
+
+
+    public void SetPlayerMoney(PlayerMoney setPlayerMoney) //set up method to CARRY the reference to the ITEM prefabs so they dont need to look for it.
+    {
+        playerMoney = setPlayerMoney;
+    }
+
     public void SetItem(Item newItem)
     {
         item = newItem;
@@ -17,5 +25,10 @@ public class ShopItemUI : MonoBehaviour //Where we DISPLAY the specific item its
         itemImage.sprite = item.ItemImage;
         itemPrice.text = item.PriceTag.ToString(); //since the PriceTag and ItemQuantity are not strings natively, they must be converted to show them
         itemQuantity.text = item.ItemQuantity.ToString();
+    }
+
+    public void onBuyClicked()
+    {
+        playerMoney.BuyItem(item); //we call our playermoney method to complete the purchase, the math is there.
     }
 }

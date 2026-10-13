@@ -53,9 +53,7 @@ public class PlayerMovement : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
-        Vector3 horizontalMovement = transform.right * horizontal + transform.forward * vertical; //we changed this to match playerLook's direction it looks, it will update its movement the same.
-        Vector3 movement = horizontalMovement.normalized * currentSpeed;
-        movement.y = verticalVelocity;
+        Vector3 movement = new Vector3 (-horizontal, 0, -vertical) * currentSpeed; //changed it to be more basic for the prototype
 
         characterCon.Move(movement * Time.deltaTime);
     }

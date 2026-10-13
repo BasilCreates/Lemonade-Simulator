@@ -8,7 +8,8 @@ public class ShopMenuUI : MonoBehaviour //where we DISPLAY the entire row of sho
     [SerializeField]
     private GameObject menuPanel; //use a master menu, shows different info, but the same overall shell
 
-
+    [SerializeField]
+    private PlayerMoney playerMoney;
 
 
 
@@ -21,7 +22,7 @@ public class ShopMenuUI : MonoBehaviour //where we DISPLAY the entire row of sho
     [SerializeField]
     private Transform contentParent; //grabbing the CONTENT parent, to make sure the prefab spawns as a child of it
 
-    public void Awake()
+    public void Awake() //make sure they are off by the start immediately.
     {
         itemOptions.SetActive(false);
         menuPanel.SetActive(false);
@@ -55,33 +56,34 @@ public class ShopMenuUI : MonoBehaviour //where we DISPLAY the entire row of sho
             {
                 ShopItemUI shopItemUI = Instantiate(itemUIPrefab, contentParent); //create a variable that takes the template, then PUTS our data into the listing, creating the new item
                 shopItemUI.SetItem(item); //sets that item.
+                shopItemUI.SetPlayerMoney(playerMoney); //give the reference of playermoney to the shopItemUI
             }
 
         }
     }
 
-    public void OpenShopMenu()
+    public void OpenShopMenu() //Opens up the shop menu along with the seller texxt
     {
         menuPanel.SetActive(true);
     }
 
-    public void ShowIngredients()
+    public void ShowIngredients() //Showing the ingredients menu
     {
         menuPanel.SetActive(false);
         itemOptions.SetActive(true);
-        CreateItemsList(Item.Icategory.Ingredient);
+        CreateItemsList(Item.Icategory.Ingredient); //specifically load the ingredients menu
     }
-    public void ShowInventory()
+    public void ShowInventory() //Show the inventory menu
     {
         menuPanel.SetActive(false);
         itemOptions.SetActive(true);
-        CreateItemsList(Item.Icategory.Inventory);
+        CreateItemsList(Item.Icategory.Inventory); //specifically load the inventory menu
     }
 
-    public void ShowStands()
+    public void ShowStands() //Show the Stands Menu
     {
         menuPanel.SetActive(false);
         itemOptions.SetActive(true);
-        CreateItemsList(Item.Icategory.LemonadeStand);
+        CreateItemsList(Item.Icategory.LemonadeStand); //specifically load the lemonade stand menu
     }
 }
