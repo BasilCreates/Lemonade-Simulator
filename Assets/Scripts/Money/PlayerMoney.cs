@@ -39,4 +39,15 @@ public class PlayerMoney : MonoBehaviour
         }
     }
 
+
+    public void ReceivePayment(int amount)
+    {
+        if (amount <= 0)
+        {
+            return;
+        }
+
+        CurrentMoney += amount;
+        moneyUI.ShowMoney();
+    }
 }

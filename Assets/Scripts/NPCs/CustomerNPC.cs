@@ -18,6 +18,15 @@ public class CustomerNPC : MonoBehaviour
     [SerializeField]
     private CustomerNPCPanel customerPanel;
 
+    [SerializeField]
+    private string orderText = "I'd like 2 lemonades, please!";
+
+    [SerializeField]
+    private int orderQuantity = 2;
+
+    public string OrderText => orderText;
+    public int OrderQuantity => orderQuantity;
+
 
     public void Update()
     {

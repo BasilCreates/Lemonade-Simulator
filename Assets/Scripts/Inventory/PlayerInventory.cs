@@ -47,4 +47,21 @@ public class PlayerInventory : MonoBehaviour
 
         return matchingItem.ItemQuantity >= amount;
     }
+
+    public bool RemoveItems(string itemName, int amount)
+    {
+        if (amount < 0)
+        {
+            return false;
+        }
+        Item matchingItem = items.Find(item => item.Name == itemName);
+
+        if (matchingItem == null || matchingItem.ItemQuantity < 0)
+        {
+            return false;
+        }
+
+        matchingItem.RemoveQuantity(amount);
+        return true;
+    }
 }

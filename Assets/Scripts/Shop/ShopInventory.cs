@@ -34,7 +34,7 @@ public class ShopInventory : MonoBehaviour
     public void CreateItem() //create a list of items, using our criteria from our Item Class
     {
         Item Cups = new Item("Cups", 5, cupImage, 50, Item.Icategory.Ingredient); //
-        Item lemon = new Item("lemon", 5, lemonImage, 5, Item.Icategory.Ingredient); //lemon is created from our item class script
+        Item lemon = new Item("Lemon", 5, lemonImage, 5, Item.Icategory.Ingredient); //lemon is created from our item class script
         Item sugarCubes = new Item("Sugar Cubes", 5, sugarCubeImage, 10, Item.Icategory.Ingredient); 
         Item waterBottle = new Item("Water Bottle", 5, waterBottleImage, 5, Item.Icategory.Ingredient);
         items.Add(lemon); //adds lemon to our list 
