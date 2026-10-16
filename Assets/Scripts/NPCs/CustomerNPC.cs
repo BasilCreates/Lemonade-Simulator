@@ -28,6 +28,11 @@ public class CustomerNPC : MonoBehaviour
     public int OrderQuantity => orderQuantity;
 
 
+    private void Start()
+    {
+        GenerateNewOrder();
+    }
+
     public void Update()
     {
 
@@ -63,5 +68,11 @@ public class CustomerNPC : MonoBehaviour
     public void ResetTalking()
     {
         startedTalking = false;
+    }
+
+    public void GenerateNewOrder()
+    {
+        orderQuantity = Random.Range(1, 6);
+        orderText = $"I'd like {orderQuantity} lemonades, please!";
     }
 }

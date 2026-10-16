@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class OrderManager : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField]
     private PlayerInventory playerInventory;
 
@@ -12,7 +13,8 @@ public class OrderManager : MonoBehaviour
     [SerializeField]
     private CustomerNPC activeCustomer;
 
-    [SerializeField]
+    [Header("Pricing")]
+    [SerializeField, Min(1)] //Min in serialize field allows us to only allow a MINIMUM of a certain number of this THING we are serializing. basically 1 serving is the least you can put, not 0
     private int pricePerServing = 2;
 
     private Lemonade lemonade;
@@ -24,12 +26,13 @@ public class OrderManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E)) //E controls the transatction logic, it unlocks it.
         {
             StartOrder();
         }
     }
 
+    //this takes the customer who is currently at the stand and marks them as active. duh.
     public void SetActiveCustomer(CustomerNPC customer)
     {
         activeCustomer = customer;
@@ -37,9 +40,17 @@ public class OrderManager : MonoBehaviour
 
     public void StartOrder()
     {
-        if (activeCustomer == null)
+        if (activeCustomer == null)  //checks if the customer is active in the scene
         {
             Debug.Log("There is no active customer.");
+            return;
+        }
+
+        if (playerInventory == null || playerMoney == null) //Checks if the player Inventory is null
+        {
+            Debug.LogError(
+                "OrderManager is missing an inventory or money reference."
+            );
             return;
         }
 
@@ -54,25 +65,23 @@ public class OrderManager : MonoBehaviour
         // Step 1: Check every ingredient before removing anything.
         foreach (IngredientRequirement requirement in lemonade.Requirements)
         {
-            int requiredAmount =
-                requirement.AmountPerServing * servings;
+            int requiredAmount = requirement.AmountPerServing * servings;
 
             if (!playerInventory.HasEnoughItems(
                     requirement.ItemName, requiredAmount))
             {
                 Debug.Log(
-                    "Not enough " + requirement.ItemName +
-                    " to complete the order."
+                    "Order failed: not enough " +
+                    requirement.ItemName + "."
                 );
                 return;
             }
         }
 
-        // Step 2: All ingredients are available. Consume them.
+        // Step 2: Remove the ingredients needed for the order.
         foreach (IngredientRequirement requirement in lemonade.Requirements)
         {
-            int requiredAmount =
-                requirement.AmountPerServing * servings;
+            int requiredAmount = requirement.AmountPerServing * servings;
 
             bool removed = playerInventory.RemoveItems(
                 requirement.ItemName, requiredAmount);
@@ -80,22 +89,27 @@ public class OrderManager : MonoBehaviour
             if (!removed)
             {
                 Debug.LogError(
-                    "Unexpected inventory failure for " +
-                    requirement.ItemName
+                    "Could not remove " + requirement.ItemName +
+                    ". Check inventory consistency."
                 );
                 return;
             }
         }
 
-        // Step 3: Calculate and receive payment.
+        // Step 3: Calculate payment and update the player's money.
         int payment = pricePerServing * servings;
         playerMoney.ReceivePayment(payment);
 
         Debug.Log(
             "Order completed: " + servings +
-            " servings sold for $" + payment
+            " servings sold for $" + payment + "."
         );
 
-        // TODO: Complete the customer interaction and spawn the next customer.
+        // Step 4: Generate the next order for the same customer.
+        activeCustomer.GenerateNewOrder();
+
+        Debug.Log(
+            "Next order: " + activeCustomer.OrderText
+        );
     }
 }
