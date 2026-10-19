@@ -19,7 +19,7 @@ public class PlayerLook : MonoBehaviour
         
         float rotation = mouseX * mouseSensitivity * Time.deltaTime;
 
-        transform.Rotate(0, 0 , rotation);
+        transform.Rotate(0, rotation, 0 );
     }
 
 }

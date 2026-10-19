@@ -35,7 +35,7 @@ public class PlayerMoney : MonoBehaviour
             currentMoney -= item.PriceTag; //runs the correct calculationsssss
             Debug.Log("Item " + item.Name + " Bought!");
             moneyUI.ShowMoney();
-            playerInventory.AddItem(item); //calls playerInventory to set the items in ITS list too, so it shows on inventory
+            playerInventory.AddItem(item, item.ItemQuantity); //calls playerInventory to set the items in ITS list too, so it shows on inventory
         }
     }
 

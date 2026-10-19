@@ -27,19 +27,28 @@ public class CustomerNPC : MonoBehaviour
     public string OrderText => orderText;
     public int OrderQuantity => orderQuantity;
 
+    private bool isFlyingAway = false;
+
 
     private void Start()
     {
-        GenerateNewOrder();
+
     }
 
     public void Update()
     {
-
+        if(isFlyingAway == true)
+        {
+            FlyAway();
+        }
     }
 
     public void NPCMove()
     {
+        if(isFlyingAway)
+        {
+            return;
+        }
         Vector3 npcPosition = gameObject.transform.position;
 
         float totalDistance = Vector3.Distance(npcPosition, standTarget.transform.position);
@@ -47,7 +56,7 @@ public class CustomerNPC : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(gameObject.transform.position, standTarget.transform.position, moveSpeed * Time.deltaTime);
             transform.LookAt(standTarget);
-            Debug.Log("Moving");
+            //Debug.Log("Moving");
         }
         else
         {
@@ -70,9 +79,11 @@ public class CustomerNPC : MonoBehaviour
         startedTalking = false;
     }
 
-    public void GenerateNewOrder()
+    public void FlyAway()
     {
-        orderQuantity = Random.Range(1, 6);
-        orderText = $"I'd like {orderQuantity} lemonades, please!";
+        isFlyingAway = true;
+        Vector3 targetArea = transform.position + Vector3.up * 100f;
+
+        transform.position = Vector3.MoveTowards(transform.position, targetArea, moveSpeed * Time.deltaTime);
     }
 }

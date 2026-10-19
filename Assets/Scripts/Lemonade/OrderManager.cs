@@ -26,7 +26,7 @@ public class OrderManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E)) //E controls the transatction logic, it unlocks it.
+        if (Input.GetKeyDown(KeyCode.F)) //E controls the transatction logic, it unlocks it.
         {
             StartOrder();
         }
@@ -105,11 +105,8 @@ public class OrderManager : MonoBehaviour
             " servings sold for $" + payment + "."
         );
 
-        // Step 4: Generate the next order for the same customer.
-        activeCustomer.GenerateNewOrder();
-
-        Debug.Log(
-            "Next order: " + activeCustomer.OrderText
-        );
+        // Step 4: logic AFTER order is complete, to do soon lol
+        Debug.Log("Order completed. Customer leaves.");
+        activeCustomer.FlyAway();
     }
 }

@@ -48,11 +48,11 @@ public class InventoryUI : MonoBehaviour
             GameObject.Destroy(child.gameObject);
         }
 
-        foreach (Item item in playerInventory.Items)
+        foreach (InventorySlot inventorySlot in playerInventory.InventorySlots)
         {
             InventoryUIPrefab inventoryuiPrefab = Instantiate(inventoryUIPrefab, contentParent); //creates the inventory slot
 
-            inventoryuiPrefab.SetItem(item); //sets the item data
+            inventoryuiPrefab.SetItem(inventorySlot); //sets the item data
         }
     }
 }

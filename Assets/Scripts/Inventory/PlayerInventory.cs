@@ -6,62 +6,78 @@ using System.Collections.Generic;
 public class PlayerInventory : MonoBehaviour
 {
     [SerializeField]
-    private List<Item> items = new List<Item>(); //creating a new list to populate BOUGHT items
+    private List<InventorySlot> items = new List<InventorySlot>(); //creating a new list to populate BOUGHT items
 
 
 
-    public List<Item> Items //public property to populate data and read PUBLICALLY, while setting it privately
+    public List<InventorySlot> InventorySlots //public property to populate data and read PUBLICALLY, while setting it privately
     {
         get { return items; }
         private set { items = value; }
     }
 
-    public void AddItem(Item item)
+    
+    public void AddItem(Item item, int amountToAdd)
     {
-        // Literally looking for an item with the same name using Find(), useful c# method
-        Item existingItem = items.Find(existingItem => existingItem.Name == item.Name);
+        if (item == null || amountToAdd <= 0)
+            return;
 
-        if (existingItem != null)
+        InventorySlot existingSlot = items.Find(slot => slot.ItemName == item.Name);
+
+        if (existingSlot != null)
         {
-            // Item already exists: increase its quantity
-            existingItem.AddQuantity(item.ItemQuantity);
-            Debug.Log("Added more " + item.Name +
-                      ". New quantity: " + existingItem.ItemQuantity);
+            existingSlot.AddQuantity(amountToAdd);
+
+            Debug.Log(
+                $"Added {amountToAdd} {item.Name}. " +
+                $"New quantity: {existingSlot.ItemQuantity}"
+            );
         }
         else
         {
-            // Item doesn't exist: create a new inventory slot
-            items.Add(item);
-            Debug.Log("Added new item: " + item.Name +
-                      ". Quantity: " + item.ItemQuantity);
+            InventorySlot newSlot = new InventorySlot(
+                item.Name,
+                amountToAdd
+            );
+
+            items.Add(newSlot);
+
+            Debug.Log(
+                $"Added new item: {item.Name}. " +
+                $"Quantity: {newSlot.ItemQuantity}"
+            );
         }
     }
-
     public bool HasEnoughItems(string itemName, int amount)
     {
-        Item matchingItem = items.Find(item => item.Name == itemName); //we find our item by grabbing our item Name in the inventory and adding it to itemName
-        if (matchingItem == null)
-        {
+        if (amount <= 0)
             return false;
-        }
 
-        return matchingItem.ItemQuantity >= amount;
+        InventorySlot matchingSlot = items.Find(slot => slot.ItemName == itemName);
+
+        if (matchingSlot == null)
+            return false;
+
+        return matchingSlot.ItemQuantity >= amount;
     }
 
     public bool RemoveItems(string itemName, int amount)
     {
-        if (amount < 0)
-        {
+        if (amount <= 0)
             return false;
-        }
-        Item matchingItem = items.Find(item => item.Name == itemName);
 
-        if (matchingItem == null || matchingItem.ItemQuantity < 0)
-        {
+        InventorySlot matchingSlot = items.Find(
+            slot => slot.ItemName == itemName
+        );
+
+        if (matchingSlot == null || matchingSlot.ItemQuantity < amount)
             return false;
-        }
 
-        matchingItem.RemoveQuantity(amount);
+        matchingSlot.RemoveQuantity(amount);
+
+        if (matchingSlot.ItemQuantity == 0)
+            items.Remove(matchingSlot);
+
         return true;
     }
 }

@@ -1,36 +1,24 @@
+using System;
 using UnityEngine;
 
 public class ShopOpen : MonoBehaviour
 {
-    public CustomerNPC npc;
-    [SerializeField]
-    private CustomerNPCPanel customerPanel;
+    public event Action PlayerEnteredShop; //an event is simply a way to notify other parts of the game when something happens without connecting them directly.
+    public event Action PlayerExitedShop;
 
-    private void OnTriggerStay(Collider other) //ontrigger stay means as long as I am on the trigger do this
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) //checks the gameplayer's tag
+        if (other.CompareTag("Player"))
         {
-            Debug.Log("Shop is open!");
-            OpenShop(); //runs openshop
+            PlayerEnteredShop?.Invoke();
         }
-        
-    }
-
-    public void OpenShop()
-    {
-        npc.NPCMove();
     }
 
     private void OnTriggerExit(Collider other)
     {
+        if (other.CompareTag("Player"))
         {
-            if (other.CompareTag("Player")) //checks the gameplayer's tag
-            {
-                Debug.Log("Shop is closed!");
-                customerPanel.TurnOffDialouge();
-                npc.ResetTalking(); //set the bool to false so that when ran into again, it triggers the text to come up again
-            }
+            PlayerExitedShop?.Invoke();
         }
-
     }
 }

@@ -12,10 +12,9 @@ public class InventoryUIPrefab : MonoBehaviour
     [SerializeField]
     private Image itemImage;
 
-    public void SetItem(Item item) //matching our data to the right slots
+    public void SetItem(InventorySlot slot)
     {
-        itemName.text = item.Name; 
-        itemQuantity.text = item.ItemQuantity.ToString();
-        itemImage.sprite = item.ItemImage;
+        itemName.text = slot.ItemName;
+        itemQuantity.text = slot.ItemQuantity.ToString();
     }
 }
