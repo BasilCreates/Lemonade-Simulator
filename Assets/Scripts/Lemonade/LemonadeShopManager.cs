@@ -3,16 +3,22 @@ using UnityEngine;
 public class LemonadeShopManager : MonoBehaviour
 {
     [SerializeField]
-    private CustomerNPC customerNPC;
-
-    [SerializeField]
-    private GameObject customerPanel;
+    private CustomerSpawner customerSpawner;
 
     [SerializeField]
     private ShopOpen shopOpen;
 
+    private CustomerNPC activeCustomer;
+
+    [SerializeField]
+    private OrderManager orderManager;
+
+
+
     private void OnEnable()
     {
+        // Listen for the player entering or leaving the shop.
+        // Assumes shopOpen is assigned in the Inspector.
         shopOpen.PlayerEnteredShop += HandlePlayerEnteredShop;
         shopOpen.PlayerExitedShop += HandlePlayerExitedShop;
     }
@@ -25,11 +31,64 @@ public class LemonadeShopManager : MonoBehaviour
 
     private void HandlePlayerEnteredShop()
     {
-        // Handle customer interaction here.
+        Debug.Log("Player entered the shop.");
+        StartServingNextCustomer();
+        if (orderManager != null)
+        {
+            orderManager.SetActiveCustomer(activeCustomer);
+
+        }
+
+        activeCustomer.ShowDialogue();
     }
 
     private void HandlePlayerExitedShop()
     {
-        // End customer interaction here.
+        Debug.Log("Player exited the shop.");
+        PlayerExitsShop();
+    }
+
+
+
+
+    public void StartServingNextCustomer()
+    {
+        // Don't assign another customer while one is being served.
+        if (activeCustomer != null)
+        {
+            return;
+        }
+
+        // Ask the spawner who is first in line.
+        CustomerNPC nextCustomer = customerSpawner.GetFirstCustomer();
+
+        if (nextCustomer == null)
+        {
+            return;
+        }
+
+        activeCustomer = nextCustomer;
+
+        // We'll tell this customer to approach the stand here.
+        activeCustomer.SetState(CustomerState.Approaching);
+        activeCustomer.FinishedLeaving += HandlePlayerLeaving;
+
+    }
+
+
+    public void PlayerExitsShop()
+    {
+        if (activeCustomer == null)
+        {
+            return;
+        }
+
+        activeCustomer.ResetTalking(); 
+    }
+
+    private void HandlePlayerLeaving(CustomerNPC customer)
+    {
+        customer.FinishedLeaving -= HandlePlayerLeaving;
+        customerSpawner.DequeueCustomer();
     }
 }

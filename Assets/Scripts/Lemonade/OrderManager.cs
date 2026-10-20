@@ -90,7 +90,7 @@ public class OrderManager : MonoBehaviour
             {
                 Debug.LogError(
                     "Could not remove " + requirement.ItemName +
-                    ". Check inventory consistency."
+                    ". Check inventory dude."
                 );
                 return;
             }
@@ -106,7 +106,7 @@ public class OrderManager : MonoBehaviour
         );
 
         // Step 4: logic AFTER order is complete, to do soon lol
-        Debug.Log("Order completed. Customer leaves.");
-        activeCustomer.FlyAway();
+        //Debug.Log("Order completed. Customer leaves.");
+        activeCustomer.SetState(CustomerState.Leaving);
     }
 }

@@ -486,8 +486,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f3147569be59114086a1e68992a0352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopOpen
-  npc: {fileID: 0}
-  customerPanel: {fileID: 931258326}
 --- !u!65 &180535031
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -665,6 +663,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 791587826}
   - {fileID: 388357426}
   - {fileID: 931258327}
   - {fileID: 1314633712}
@@ -1378,6 +1377,53 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1 &791587825
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 791587826}
+  - component: {fileID: 791587827}
+  m_Layer: 0
+  m_Name: LemonadeShopManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &791587826
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 791587825}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1076.1393, y: -393.1201, z: -34.89062}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 218757764}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &791587827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 791587825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09413a684d2c36d47af8ac313bd3ea51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LemonadeShopManager
+  customerSpawner: {fileID: 1255092632}
+  shopOpen: {fileID: 180535030}
+  orderManager: {fileID: 1537329364}
 --- !u!1 &810923965
 GameObject:
   m_ObjectHideFlags: 0
@@ -2665,6 +2711,9 @@ MonoBehaviour:
   spawnPoint: {fileID: 1255092631}
   customerSpace: 2
   nextCustomerIndex: 0
+  standTarget: {fileID: 1215892908}
+  playerTarget: {fileID: 180535029}
+  customerPanel: {fileID: 931258326}
 --- !u!1 &1296981123
 GameObject:
   m_ObjectHideFlags: 0
