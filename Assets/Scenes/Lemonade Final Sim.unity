@@ -301,7 +301,7 @@ GameObject:
   - component: {fileID: 82048274}
   - component: {fileID: 82048275}
   m_Layer: 0
-  m_Name: Seller Stand
+  m_Name: Seller Dialouge Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -350,13 +350,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 82048272}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce0b7b6ac21821c43a066064ba223b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SellerOpen
   sellerPanel: {fileID: 821704723}
   storeOptionsPanel: {fileID: 3783875334377398718}
+  itemOptions: {fileID: 1731994933}
+  menuPanel: {fileID: 3783875334377398718}
+  storeOptionsPanelPrefab: {fileID: 4024206711711377583}
 --- !u!4 &86720955 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ad287db694a3f304ca66f872659c18d0, type: 3}

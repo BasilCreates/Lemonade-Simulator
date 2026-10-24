@@ -13,8 +13,6 @@ public class LemonadeShopManager : MonoBehaviour
     [SerializeField]
     private OrderManager orderManager;
 
-
-
     private void OnEnable()
     {
         // Listen for the player entering or leaving the shop.
@@ -64,9 +62,10 @@ public class LemonadeShopManager : MonoBehaviour
 
         if (nextCustomer == null)
         {
+            Debug.Log("No customers in line.");
             return;
         }
-
+        orderManager.SetActiveCustomer(nextCustomer);
         activeCustomer = nextCustomer;
 
         // We'll tell this customer to approach the stand here.
@@ -89,6 +88,10 @@ public class LemonadeShopManager : MonoBehaviour
     private void HandlePlayerLeaving(CustomerNPC customer)
     {
         customer.FinishedLeaving -= HandlePlayerLeaving;
+        activeCustomer = null;
+        Debug.Log($"Leaving event: {customer.GetEntityId()}");
         customerSpawner.DequeueCustomer();
+        StartServingNextCustomer();
+        Debug.Log("Customer has left the shop.");
     }
 }

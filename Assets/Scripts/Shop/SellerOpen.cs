@@ -1,18 +1,34 @@
 using UnityEngine;
 using UnityEngine.UI;
-
 public class SellerOpen : MonoBehaviour, IInteractable
 {
-    public GameObject sellerPanel;
-    public GameObject storeOptionsPanel;
+    [SerializeField]
+    private GameObject sellerPanel;
+
+    [SerializeField]
+    private GameObject storeOptionsPanel;
+
+    public GameObject itemOptions;
+
+    public GameObject menuPanel; //use a master menu, shows different info, but the same overall shell
+
+    public GameObject walkToShopPanel;
+
 
     private bool sellerTalk = false;
 
 
     private void Awake()
     {
+
         SellerCloses();
     }
+
+    public void Update()
+    {
+        Closetabs();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -37,6 +53,7 @@ public class SellerOpen : MonoBehaviour, IInteractable
         if (other.CompareTag("Player"))
         {
             SellerCloses();
+            walkToShopPanel.SetActive(true);
         }
     }
 
@@ -45,14 +62,24 @@ public class SellerOpen : MonoBehaviour, IInteractable
         sellerPanel.SetActive(true);
         storeOptionsPanel.SetActive(true);
         Debug.Log("Turning on panels");
+        walkToShopPanel.SetActive(false);
         sellerTalk = true;
     }
 
     public void SellerCloses()
     {
+        itemOptions.SetActive(false);
+        menuPanel.SetActive(false);
         sellerPanel.SetActive(false);
         storeOptionsPanel.SetActive(false);
         sellerTalk=false;
     }
 
+    public void Closetabs()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape)) //an escape chain to get out of the menu. nice and easy.
+        {
+            SellerCloses();
+        }
+    }
 }

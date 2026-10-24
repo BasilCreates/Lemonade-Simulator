@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 public class CustomerPool: MonoBehaviour
 {
     [SerializeField]
@@ -7,7 +8,6 @@ public class CustomerPool: MonoBehaviour
 
     private Stack<CustomerNPC> availableNPCPool = new Stack<CustomerNPC>(); //stack is a data structure that allows us to store and retrieve objects in a last-in-first-out (LIFO) manner. In this case, we are using it to manage the pool of active customer NPCs. (shoutout claude)
 
-    private HashSet<CustomerNPC> activeNPCs = new HashSet<CustomerNPC>(); //HashSet is a data structure that allows us to store and retrieve objects in a way that ensures uniqueness. In this case, we are using it to keep track of the currently active customer NPCs.
     [SerializeField, Min(1)]
     private int maxCustomers = 10;
 
@@ -15,7 +15,7 @@ public class CustomerPool: MonoBehaviour
     private void Start()
     {
 
-        Debug.Log("Initializing Customer Pool...");
+        Debug.Log("Generating objects in Customer Pool...");
         for (int i = 0; i < maxCustomers; i++)
         {
            CustomerNPC customer =  Instantiate(customerPrefab, transform).GetComponent<CustomerNPC>();
@@ -23,7 +23,7 @@ public class CustomerPool: MonoBehaviour
             customer.gameObject.SetActive(false);
                 availableNPCPool.Push(customer);
         }
-        Debug.Log($"Customer Pool initialized with {availableNPCPool.Count} customers.");
+        Debug.Log($"Customer Pool populated with {availableNPCPool.Count} customers.");
     }
 
     public CustomerNPC GetCustomer()
@@ -31,9 +31,8 @@ public class CustomerPool: MonoBehaviour
         if (availableNPCPool.Count > 0) //if there is a customer available in the pool, it will pop one out and return it to the hashset to be set active.
         {
            CustomerNPC customer = availableNPCPool.Pop();
-
-            activeNPCs.Add(customer); 
             customer.gameObject.SetActive(true);
+            Debug.Log("Customer activated from pool");
 
             return customer;
         }
@@ -43,15 +42,16 @@ public class CustomerPool: MonoBehaviour
 
     public void ReturnCustomer(CustomerNPC customer)
     {
-        if (activeNPCs.Contains(customer)) //if there is a customer
+        if (customer == null) //if there is no customer
         {
-            activeNPCs.Remove(customer); //it removes said customer from the activeNPCs hashset
-            customer.gameObject.SetActive(false); //turns it off
-            availableNPCPool.Push(customer); //puts it back into the stack pool for later
+            return;
         }
-        else
-        {
-            Debug.LogWarning("Attempted to return a customer that is not active.");
-        }
+        Debug.Log("Returning customer to pool");
+        customer.ResetTalking(); //reset the talking state of the customer
+        customer.gameObject.SetActive(false); //turns it off
+        availableNPCPool.Push(customer); //puts it back into the stack pool for later
+        customer.SetState(CustomerState.Waiting); //set the state back to waiting
+
     }
+
 }

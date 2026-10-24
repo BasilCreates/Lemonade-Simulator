@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,13 +25,11 @@ public class CustomerSpawner : MonoBehaviour
     [SerializeField] 
     private CustomerNPCPanel customerPanel;
 
-
-
     private Queue<CustomerNPC> customerQueue = new Queue<CustomerNPC>();
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) 
+        if (customerQueue.Count < 10)
         {
             SpawnCustomer();
         }
@@ -41,14 +40,20 @@ public class CustomerSpawner : MonoBehaviour
         CustomerNPC customer = customerPool.GetCustomer(); //storing our customer in a variable, its easier to work with it this way.
         if (customer != null)
         {
+            int queueIndex = customerQueue.Count;
+            Vector3 target = CustomerSpotInLine(queueIndex);
+            customer.SetSpotInLine(target);
+
             customer.transform.position =
                 spawnPoint.position - spawnPoint.forward * customerSpace * nextCustomerIndex;
 
-            nextCustomerIndex++;
+            nextCustomerIndex++; 
             customer.transform.rotation = spawnPoint.rotation;
             customerQueue.Enqueue(customer);
+
             customer.Initialize(standTarget, playerTarget, customerPanel);
             Debug.Log("Spawned a customer.");
+            customer.name = $"Customer_{nextCustomerIndex}";
         }
         else
         {
@@ -62,7 +67,8 @@ public class CustomerSpawner : MonoBehaviour
         {
             return null;
         }
-        return customerQueue.Peek(); //gets who the first customer in the queue is, but does not remove them from the queue.
+        Debug.Log("Getting first customer in queue.");
+        return customerQueue.Peek(); //gets who the first customer in the queue is, but does not remove them from the queue
 
     }
 
@@ -74,12 +80,33 @@ public class CustomerSpawner : MonoBehaviour
         }
 
         CustomerNPC customer = customerQueue.Dequeue();
+        //Debug.Log($"Dequeued Customer: {customer.GetEntityId()}");
 
         nextCustomerIndex--;
 
         Debug.LogWarning("Despawning Customer.");
         customerPool.ReturnCustomer(customer);
-
+        UpdateSpotInLine();
+        Debug.Log("calling for next customer!");
         return customer;
+    }
+
+    private Vector3 CustomerSpotInLine(int queueIndex)
+    {
+
+        return spawnPoint.position - spawnPoint.forward * customerSpace * queueIndex;
+
+    }
+
+    private void UpdateSpotInLine()
+    {
+        CustomerNPC[] customers = customerQueue.ToArray();
+
+        for (int i = 0; i < customers.Length; i++)
+        {
+            Vector3 target = CustomerSpotInLine(i);
+            customers[i].SetSpotInLine(target);
+        }
+
     }
 }

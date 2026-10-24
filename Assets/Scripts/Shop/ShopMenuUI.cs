@@ -11,8 +11,6 @@ public class ShopMenuUI : MonoBehaviour //where we DISPLAY the entire row of sho
     [SerializeField]
     private PlayerMoney playerMoney;
 
-
-
     [SerializeField]
     private ShopInventory inventory; //calling our shop inventory to get our data, to populate the UI.
 
@@ -22,25 +20,11 @@ public class ShopMenuUI : MonoBehaviour //where we DISPLAY the entire row of sho
     [SerializeField]
     private Transform contentParent; //grabbing the CONTENT parent, to make sure the prefab spawns as a child of it
 
-    public void Awake() //make sure they are off by the start immediately.
-    {
-        itemOptions.SetActive(false);
-        menuPanel.SetActive(false);
-    }
+
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) //an escape chain to get out of the menu. nice and easy.
-        {
-            if (itemOptions.activeSelf)
-            {
-                itemOptions.SetActive(false);
-            }
-            else if (menuPanel.activeSelf)
-            {
-                menuPanel.SetActive(false);
-            }
-        }
+
     }
 
 

@@ -9,6 +9,10 @@ public class CustomerNPC : MonoBehaviour
     private float moveSpeed = 2f;
 
     [SerializeField]
+    private Vector3 spotInLine;
+
+
+    [SerializeField]
     private float stoppingDistance = 5;
 
     [SerializeField]
@@ -41,7 +45,7 @@ public class CustomerNPC : MonoBehaviour
 
         if(newState == CustomerState.Leaving)
         {
-            flyDistance = transform.position + Vector3.up * 20f;
+            flyDistance = transform.position + Vector3.up * 10f;
             Debug.Log("Customer is leaving.");
         }
     }
@@ -61,6 +65,8 @@ public class CustomerNPC : MonoBehaviour
         switch (currentState)
         {
             case CustomerState.Waiting:
+                MoveInLine();
+                //Debug.Log("Line is Moving");
                 ///it waits till i approach duh
                 break;
 
@@ -107,6 +113,17 @@ public class CustomerNPC : MonoBehaviour
                 return;
             }
         }
+    }
+
+    public void SetSpotInLine(Vector3 spotInTheline)
+    {
+        spotInLine = spotInTheline;
+    }
+
+    public void MoveInLine()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, spotInLine, moveSpeed * Time.deltaTime);
+
     }
 
     public void ShowDialogue()
