@@ -30,7 +30,9 @@ public class LemonadeShopManager : MonoBehaviour
     private void HandlePlayerEnteredShop()
     {
         Debug.Log("Player entered the shop.");
+
         StartServingNextCustomer();
+
         if (orderManager != null)
         {
             orderManager.SetActiveCustomer(activeCustomer);
@@ -70,6 +72,7 @@ public class LemonadeShopManager : MonoBehaviour
 
         // We'll tell this customer to approach the stand here.
         activeCustomer.SetState(CustomerState.Approaching);
+        customerSpawner.UpdateSpotInLine();
         activeCustomer.FinishedLeaving += HandlePlayerLeaving;
 
     }

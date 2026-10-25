@@ -44,10 +44,10 @@ public class CustomerSpawner : MonoBehaviour
             Vector3 target = CustomerSpotInLine(queueIndex);
             customer.SetSpotInLine(target);
 
-            customer.transform.position =
-                spawnPoint.position - spawnPoint.forward * customerSpace * nextCustomerIndex;
+            customer.transform.position = CustomerSpotInLine(queueIndex + 1);
+            //spawnPoint.position - spawnPoint.forward * customerSpace * nextCustomerIndex;
 
-            nextCustomerIndex++; 
+            //nextCustomerIndex++; 
             customer.transform.rotation = spawnPoint.rotation;
             customerQueue.Enqueue(customer);
 
@@ -98,15 +98,18 @@ public class CustomerSpawner : MonoBehaviour
 
     }
 
-    private void UpdateSpotInLine()
+    public void UpdateSpotInLine()
     {
+        Debug.Log("Updating customer spots in line.");
         CustomerNPC[] customers = customerQueue.ToArray();
 
         for (int i = 0; i < customers.Length; i++)
         {
             Vector3 target = CustomerSpotInLine(i);
             customers[i].SetSpotInLine(target);
+            Debug.Log($"{customers[i].name} | Index: {i} | Target: {target}");
         }
+
 
     }
 }
