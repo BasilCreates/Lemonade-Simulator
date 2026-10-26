@@ -7,6 +7,8 @@ public class Lemonade //what our lemonade ACTUALLY IS, the ingredients put toget
     private List<IngredientRequirement> ingredientRequirements = new List<IngredientRequirement>();
 
 
+    private int pricePerServing = 2;
+
     public void AddRequirement(IngredientRequirement ingredientRequirement)
     {
         ingredientRequirements.Add(ingredientRequirement);
@@ -23,6 +25,13 @@ public class Lemonade //what our lemonade ACTUALLY IS, the ingredients put toget
 
     public IReadOnlyList<IngredientRequirement> Requirements //an interface that exposes the list but does NOT let outside scripts alter it to however they want
     {
-        get { return ingredientRequirements; } 
+        get { return ingredientRequirements; }
     }
+
+    public int PricePerServing
+    {
+       get { return pricePerServing; }
+       private set { pricePerServing = value; }
+    }   
+
 }

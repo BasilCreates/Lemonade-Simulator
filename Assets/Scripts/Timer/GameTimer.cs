@@ -19,6 +19,9 @@ public class GameTimer : MonoBehaviour
     [SerializeField]
     private bool isTimerRunning = true;
 
+
+    private int additionalTime;
+
     public event Action OnTimerEnd;
 
 
@@ -50,8 +53,13 @@ public class GameTimer : MonoBehaviour
         }
 
     }
-}
 
+    public void AddTime(float additionalTime)
+    {
+        timeRemaining += additionalTime;
+    }
+
+}
 
 
 

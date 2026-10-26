@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CustomerNPC : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class CustomerNPC : MonoBehaviour
     private CustomerNPCPanel customerPanel;
 
     [SerializeField]
-    private string orderText = "I'd like 2 lemonades, please!";
+    private string orderText;
 
     [SerializeField]
     private int orderQuantity = 2;
@@ -104,6 +105,8 @@ public class CustomerNPC : MonoBehaviour
             currentState = CustomerState.Ordering;
             if (!startedTalking)
             {
+                CustomerOrdersFood();
+                customerPanel.SetOrderText(orderText);
                 customerPanel.TurnOnDialouge();
                 startedTalking = true;
                 Debug.Log(currentState);
@@ -112,6 +115,22 @@ public class CustomerNPC : MonoBehaviour
             {
                 return;
             }
+        }
+    }
+
+    public void CustomerOrdersFood()
+    {
+        Debug.Log("Customer is ordering  a randomized amount...." + orderQuantity);
+        orderQuantity = UnityEngine.Random.Range(1, 5);
+
+
+        if (orderQuantity > 1)
+        {
+            orderText = "I would like " + orderQuantity + " lemonades please!";
+        }
+        else
+        {
+            orderText = "I would like " + orderQuantity + " lemonade please!";
         }
     }
 

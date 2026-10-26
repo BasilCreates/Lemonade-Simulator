@@ -1,5 +1,7 @@
 
+using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OrderManager : MonoBehaviour
 {
@@ -13,9 +15,11 @@ public class OrderManager : MonoBehaviour
     [SerializeField]
     private CustomerNPC activeCustomer;
 
-    [Header("Pricing")]
-    [SerializeField, Min(1)] //Min in serialize field allows us to only allow a MINIMUM of a certain number of this THING we are serializing. basically 1 serving is the least you can put, not 0
-    private int pricePerServing = 2;
+    [SerializeField]
+    private Text orderDialouge; //ref to show how many lemonade the customer wants to buy
+
+    public event Action OnOrderCompleted;
+
 
     private Lemonade lemonade;
 
@@ -40,13 +44,13 @@ public class OrderManager : MonoBehaviour
 
     public void StartOrder()
     {
-        if (activeCustomer == null)  //checks if the customer is active in the scene
+        if (activeCustomer == null)  //checks if there is a confirmed active customer
         {
             Debug.Log("There is no active customer.");
             return;
         }
 
-        if (playerInventory == null || playerMoney == null) //Checks if the player Inventory is null
+        if (playerInventory == null || playerMoney == null) //Checks if the player Inventory is there
         {
             Debug.LogError(
                 "OrderManager is missing an inventory or money reference."
@@ -56,7 +60,7 @@ public class OrderManager : MonoBehaviour
 
         int servings = activeCustomer.OrderQuantity;
 
-        if (servings <= 0 || pricePerServing <= 0)
+        if (servings <= 0 || lemonade.PricePerServing <= 0)
         {
             Debug.LogWarning("Invalid order quantity or price.");
             return;
@@ -78,7 +82,7 @@ public class OrderManager : MonoBehaviour
             }
         }
 
-        // Step 2: Remove the ingredients needed for the order.
+        // Remove the ingredients needed for the order.
         foreach (IngredientRequirement requirement in lemonade.Requirements)
         {
             int requiredAmount = requirement.AmountPerServing * servings;
@@ -96,14 +100,11 @@ public class OrderManager : MonoBehaviour
             }
         }
 
-        // Step 3: Calculate payment and update the player's money.
-        int payment = pricePerServing * servings;
+        //Calculate payment and update the player's money.
+        int payment = lemonade.PricePerServing * servings;
         playerMoney.ReceivePayment(payment);
 
-        Debug.Log(
-            "Order completed: " + servings +
-            " servings sold for $" + payment + "."
-        );
+        OnOrderCompleted?.Invoke();   
 
         // Step 4: logic AFTER order is complete, to do soon lol
         //Debug.Log("Order completed. Customer leaves.");

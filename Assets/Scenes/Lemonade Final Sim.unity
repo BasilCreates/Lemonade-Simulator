@@ -299,6 +299,7 @@ GameObject:
   m_Component:
   - component: {fileID: 41542379}
   - component: {fileID: 41542380}
+  - component: {fileID: 41542381}
   m_Layer: 0
   m_Name: TImerManager
   m_TagString: Untagged
@@ -334,10 +335,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameTimer
   TimerText: {fileID: 1211687496}
-  timeRemaining: 5
+  timeRemaining: 200
   timeElapsed: 1
   gameOverTime: 0.99
   isTimerRunning: 1
+--- !u!114 &41542381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41542378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01f15867e45ffd149afda042aef6905e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RewardTime
+  orderManager: {fileID: 1537329364}
+  gameTimer: {fileID: 41542380}
 --- !u!1 &82048272
 GameObject:
   m_ObjectHideFlags: 0
@@ -2356,6 +2371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomerNPCPanel
   customerPanel: {fileID: 1454768243}
+  orderText: {fileID: 155092426}
 --- !u!4 &931258327
 Transform:
   m_ObjectHideFlags: 0
@@ -2461,7 +2477,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &951588782
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3604,7 +3620,7 @@ MonoBehaviour:
   playerInventory: {fileID: 1154675991}
   playerMoney: {fileID: 1154675992}
   activeCustomer: {fileID: 0}
-  pricePerServing: 2
+  orderDialouge: {fileID: 0}
 --- !u!1 &1578005569
 GameObject:
   m_ObjectHideFlags: 0
