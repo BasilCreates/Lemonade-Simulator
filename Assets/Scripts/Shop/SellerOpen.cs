@@ -3,7 +3,7 @@ using UnityEngine.UI;
 public class SellerOpen : MonoBehaviour, IInteractable
 {
     [SerializeField]
-    private GameObject sellerPanel;
+    private GameObject sellerDialougeText;
 
     [SerializeField]
     private GameObject storeOptionsPanel;
@@ -59,7 +59,7 @@ public class SellerOpen : MonoBehaviour, IInteractable
 
     public void SellerOpens()
     {
-        sellerPanel.SetActive(true);
+        sellerDialougeText.SetActive(true);
         storeOptionsPanel.SetActive(true);
         Debug.Log("Turning on panels");
         walkToShopPanel.SetActive(false);
@@ -70,7 +70,7 @@ public class SellerOpen : MonoBehaviour, IInteractable
     {
         itemOptions.SetActive(false);
         menuPanel.SetActive(false);
-        sellerPanel.SetActive(false);
+        sellerDialougeText.SetActive(false);
         storeOptionsPanel.SetActive(false);
         sellerTalk=false;
     }
