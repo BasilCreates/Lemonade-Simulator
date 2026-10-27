@@ -300,6 +300,7 @@ GameObject:
   - component: {fileID: 41542379}
   - component: {fileID: 41542380}
   - component: {fileID: 41542381}
+  - component: {fileID: 41542382}
   m_Layer: 0
   m_Name: TImerManager
   m_TagString: Untagged
@@ -335,7 +336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameTimer
   TimerText: {fileID: 1211687496}
-  timeRemaining: 200
+  timeRemaining: 30
   timeElapsed: 1
   gameOverTime: 0.99
   isTimerRunning: 1
@@ -353,6 +354,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RewardTime
   orderManager: {fileID: 1537329364}
   gameTimer: {fileID: 41542380}
+  timeReward: 5
+--- !u!114 &41542382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41542378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0273cb7f77326bc48a9a3171c24b5966, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpeedUpTime
+  gameTimer: {fileID: 41542380}
+  moneyUI: {fileID: 388357427}
+  nextThreshold: 150
+  speedUpAmount: 1
 --- !u!1 &82048272
 GameObject:
   m_ObjectHideFlags: 0
@@ -1169,6 +1187,7 @@ RectTransform:
   - {fileID: 5018271482926501054}
   - {fileID: 1239378355}
   - {fileID: 603659977}
+  - {fileID: 792048853}
   m_Father: {fileID: 1485585004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1731,6 +1750,82 @@ MonoBehaviour:
   customerSpawner: {fileID: 1255092632}
   shopOpen: {fileID: 180535030}
   orderManager: {fileID: 1537329364}
+--- !u!1 &792048852
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 792048853}
+  - component: {fileID: 792048855}
+  - component: {fileID: 792048854}
+  m_Layer: 0
+  m_Name: You are out of....Text Frame
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &792048853
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792048852}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2040330920}
+  m_Father: {fileID: 445847129}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -116, y: -233.54}
+  m_SizeDelta: {x: 778.3083, y: 166.7298}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &792048854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792048852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &792048855
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792048852}
+  m_CullTransparentMesh: 1
 --- !u!1 &810923965
 GameObject:
   m_ObjectHideFlags: 0
@@ -2372,6 +2467,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CustomerNPCPanel
   customerPanel: {fileID: 1454768243}
   orderText: {fileID: 155092426}
+  playerisOutOfFrame: {fileID: 792048852}
+  playerIsOutOfText: {fileID: 2040330921}
 --- !u!4 &931258327
 Transform:
   m_ObjectHideFlags: 0
@@ -2857,10 +2954,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfd7563074ed1054787c7db1e0538bfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMoney
+  startingMoney: 100
   playerInventory: {fileID: 1154675991}
   currentMoney: 0
   moneyUI: {fileID: 388357427}
-  minimumMoney: 0
 --- !u!4 &1154675993
 Transform:
   m_ObjectHideFlags: 0
@@ -3620,7 +3717,7 @@ MonoBehaviour:
   playerInventory: {fileID: 1154675991}
   playerMoney: {fileID: 1154675992}
   activeCustomer: {fileID: 0}
-  orderDialouge: {fileID: 0}
+  customerNPCPanel: {fileID: 931258326}
 --- !u!1 &1578005569
 GameObject:
   m_ObjectHideFlags: 0
@@ -4419,6 +4516,85 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &2040330919
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2040330920}
+  - component: {fileID: 2040330922}
+  - component: {fileID: 2040330921}
+  m_Layer: 0
+  m_Name: You are out of.... Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2040330920
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2040330919}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 792048853}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -1.5963, y: 9.0161}
+  m_SizeDelta: {x: 688.0833, y: 92.8073}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2040330921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2040330919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Text
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.89062405, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 40
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 4
+    m_MaxSize: 40
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: New Text
+--- !u!222 &2040330922
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2040330919}
+  m_CullTransparentMesh: 1
 --- !u!1 &2047046369
 GameObject:
   m_ObjectHideFlags: 0
@@ -4436,7 +4612,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2047046370
 RectTransform:
   m_ObjectHideFlags: 0

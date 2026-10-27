@@ -59,6 +59,11 @@ public class GameTimer : MonoBehaviour
         timeRemaining += additionalTime;
     }
 
+    public void SpeedUpTime(int timeSpedUp)
+    {
+        timeElapsed += timeSpedUp;
+    }
+
 }
 
 

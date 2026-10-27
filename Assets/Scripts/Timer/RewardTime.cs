@@ -8,6 +8,7 @@ public class RewardTime : MonoBehaviour
     [SerializeField]
     private GameTimer gameTimer;
 
+    [SerializeField]
     private int timeReward = 20; // Amount of time to reward in seconds
 
     public void OnEnable()

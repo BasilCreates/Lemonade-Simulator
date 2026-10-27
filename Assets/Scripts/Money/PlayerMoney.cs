@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class PlayerMoney : MonoBehaviour
 {
-    private int startingMoney = 1000; //testing money the user will be starting with
+    [SerializeField]
+    private int startingMoney; //testing money the user will be starting with
 
     [SerializeField]
     private PlayerInventory playerInventory;
@@ -14,8 +15,6 @@ public class PlayerMoney : MonoBehaviour
     [SerializeField] 
     private MoneyUI moneyUI;
 
-    [SerializeField]
-    private int minimumMoney = 0; //the money CANNOT go lower than this amount. will use later
 
     private void Awake()
     {

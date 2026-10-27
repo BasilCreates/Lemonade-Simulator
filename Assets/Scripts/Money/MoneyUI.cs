@@ -8,7 +8,7 @@ public class MoneyUI : MonoBehaviour
     public PlayerMoney playerMoney;
 
 
-    private void Awake()
+    private void Start()
     {
         moneyText.text = playerMoney.CurrentMoney.ToString(); //we grab our currentmoney property, and can basically show it through here
     }

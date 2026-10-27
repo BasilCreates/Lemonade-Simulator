@@ -15,10 +15,10 @@ public class OrderManager : MonoBehaviour
     [SerializeField]
     private CustomerNPC activeCustomer;
 
-    [SerializeField]
-    private Text orderDialouge; //ref to show how many lemonade the customer wants to buy
-
     public event Action OnOrderCompleted;
+
+    [SerializeField]
+    private CustomerNPCPanel customerNPCPanel;
 
 
     private Lemonade lemonade;
@@ -74,10 +74,9 @@ public class OrderManager : MonoBehaviour
             if (!playerInventory.HasEnoughItems(
                     requirement.ItemName, requiredAmount))
             {
-                Debug.Log(
-                    "Order failed: not enough " +
-                    requirement.ItemName + "."
-                );
+                Debug.Log( "Order failed: not enough " + requirement.ItemName + "."   );
+                customerNPCPanel.PlayerIsOutOf(requirement.ItemName);
+                
                 return;
             }
         }
@@ -93,8 +92,7 @@ public class OrderManager : MonoBehaviour
             if (!removed)
             {
                 Debug.LogError(
-                    "Could not remove " + requirement.ItemName +
-                    ". Check inventory dude."
+                    "Could not remove " + requirement.ItemName + ". Check inventory dude."
                 );
                 return;
             }
