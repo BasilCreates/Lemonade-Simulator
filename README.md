@@ -11,9 +11,9 @@ Some of the systems I've been working on:
 
 **Customer Behaviour:** Managing customer interactions through different states, including waiting, approaching, ordering, and leaving.
 
-**Inventory & Order Validation:** Checking ingredient requirements before processing orders, including identifying multiple missing ingredients instead of stopping at the first unavailable item.
+**Inventory System & Order Validation:** Checking ingredient requirements before processing orders, including identifying multiple missing ingredients instead of stopping at the first unavailable item.
 
-**Event-Driven Communication:** Using C# events to notify other systems when certain gameplay events occur, keeping systems from relying too heavily on direct communication.
+**Event-Driven Decoupling:** Using C# events to notify other systems when certain gameplay events occur, keeping systems from relying too heavily on direct communication.
 
 **Game Flow:** Handling order progression, countdown timers, game-over conditions, and scene transitions.
 
@@ -22,3 +22,12 @@ What I'm focusing on
 Beyond getting the game working, I want to understand the reasoning behind how systems are structured, how they communicate, and how to keep code maintainable as a project grows.
 
 This project has been a practical way to experiment with C#, OOP, system responsibilities, and solving the little problems that come with making different gameplay systems work together.
+
+
+Key scripts to take a look at:
+- OrderManager.cs
+- CustomerNPC.cs
+- CustomerPool.cs
+- CustomerSpawner.cs
+- ShopItemMenu.cs
+- Ingredients.cs
