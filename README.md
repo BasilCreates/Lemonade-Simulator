@@ -2,20 +2,23 @@
 Lemonade Simulator Mini-Game, I built it just to iron out my fundamentals some more. 3-week timeline, lets get this done!
 
 
-The project explores how independent systems can work together to manage customer interactions, queue progression, inventory requirements, and order processing.
 
-Key Technical Implementations:
+he main goal of this project was to get hands-on experience building interconnected gameplay systems and understanding how to make them work together without having everything crammed into one script.
 
-Customer Queue Management: Uses C# queues and object pooling to manage customer lifecycles, reduce unnecessary instantiation, and maintain queue positioning as customers arrive and leave.
+Some of the systems I've been working on:
 
-Customer State Management: Implements state-based customer behaviour to control transitions between waiting, approaching, ordering, and leaving.
+Customer Queue System: Managing customer order and positioning using C# queues, alongside object pooling to reuse customer NPCs instead of constantly instantiating new ones.
 
-Inventory Validation: Uses requirement-based checks to verify ingredient availability before processing transactions, identifying and reporting multiple missing ingredients rather than failing on the first unavailable item.
+Customer Behaviour: Managing customer interactions through different states, including waiting, approaching, ordering, and leaving.
 
-Event-Driven Communication: Uses C# events to communicate gameplay outcomes between systems, reducing direct dependencies between components.
+Inventory & Order Validation: Checking ingredient requirements before processing orders, including identifying multiple missing ingredients instead of stopping at the first unavailable item.
 
-Gameplay Flow Management: Coordinates order completion, customer progression, countdown-based round limits, and scene transitions.
+Event-Driven Communication: Using C# events to notify other systems when certain gameplay events occur, keeping systems from relying too heavily on direct communication.
 
-Engineering Focus
+Game Flow: Handling order progression, countdown timers, game-over conditions, and scene transitions.
 
-The primary goal is to explore modular gameplay architecture, clear separation of responsibilities, and reliable communication between interconnected systems. The project emphasizes solving practical gameplay problems through maintainable C# implementations rather than relying on monolithic scripts.
+What I'm focusing on
+
+Beyond getting the game working, I want to understand the reasoning behind how systems are structured, how they communicate, and how to keep code maintainable as a project grows.
+
+This project has been a practical way to experiment with C#, OOP, system responsibilities, and solving the little problems that come with making different gameplay systems work together.
