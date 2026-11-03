@@ -17,7 +17,7 @@ Some of the systems I've been working on:
 
 **Game Flow:** Handling order progression, countdown timers, game-over conditions, and scene transitions.
 
-What I'm focusing on
+**What I'm focusing on**
 
 Beyond getting the game working, I want to understand the reasoning behind how systems are structured, how they communicate, and how to keep code maintainable as a project grows.
 
