@@ -7,15 +7,15 @@ The main goal of this project was to get hands-on experience building interconne
 
 Some of the systems I've been working on:
 
-Customer Queue System: Managing customer order and positioning using C# queues, alongside object pooling to reuse customer NPCs instead of constantly instantiating new ones.
+**Customer Queue System:** Managing customer order and positioning using C# queues, alongside object pooling to reuse customer NPCs instead of constantly instantiating new ones.
 
-Customer Behaviour: Managing customer interactions through different states, including waiting, approaching, ordering, and leaving.
+**Customer Behaviour:** Managing customer interactions through different states, including waiting, approaching, ordering, and leaving.
 
-Inventory & Order Validation: Checking ingredient requirements before processing orders, including identifying multiple missing ingredients instead of stopping at the first unavailable item.
+**Inventory & Order Validation:** Checking ingredient requirements before processing orders, including identifying multiple missing ingredients instead of stopping at the first unavailable item.
 
-Event-Driven Communication: Using C# events to notify other systems when certain gameplay events occur, keeping systems from relying too heavily on direct communication.
+**Event-Driven Communication:** Using C# events to notify other systems when certain gameplay events occur, keeping systems from relying too heavily on direct communication.
 
-Game Flow: Handling order progression, countdown timers, game-over conditions, and scene transitions.
+**Game Flow:** Handling order progression, countdown timers, game-over conditions, and scene transitions.
 
 What I'm focusing on
 
