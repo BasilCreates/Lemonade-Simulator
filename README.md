@@ -1,9 +1,9 @@
 # Lemonade-Simulator
-Lemonade Simulator Mini-Game, I built it just to iron out my fundamentals some more. 3-week timeline, lets get this done!
+Lemonade Simulator Mini-Game, I built it just to iron out my systems architecture fundamentals some more. lets get this done!
 
 
 
-The main goal of this project was to get hands-on experience building interconnected gameplay systems and understanding how to make them work together without having everything crammed into one script.
+The main goal of this project was to get hands-on experience building interconnected gameplay systems and understanding how to make them work together without having everything tightly interconnected and hard to scale overall. I think I did a pretty good job!
 
 Some of the systems I've been working on:
 
