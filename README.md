@@ -3,7 +3,7 @@ Lemonade Simulator Mini-Game, I built it just to iron out my systems architectur
 
 
 
-The main goal of this project was to get hands-on experience building interconnected gameplay systems and understanding how to make them work together without having everything tightly interconnected and harder to maintain/scale overall. I think I did a pretty good job!
+The main goal of this project was to get hands-on experience building interconnected gameplay systems and understanding how to make them work together without having everything tightly interconnected and harder to maintain/scale overall. The main goal was to maintain code modularity and keep everything as loosely connected as possible to leave room for newer features.
 
 Some of the systems I've been working on:
 
